@@ -71,4 +71,3 @@ dependencies {
     // Testing
     androidTestImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
 }
-
