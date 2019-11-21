@@ -1,4 +1,4 @@
-package com.example.roomwordsampleapplication
+package com.example.roomwordsampleapplication.main
 
 import android.app.Activity
 import android.content.Intent
@@ -9,6 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.roomwordsampleapplication.newword.NewWordActivity
+import com.example.roomwordsampleapplication.R
+import com.example.roomwordsampleapplication.WordListAdapter
 import com.example.roomwordsampleapplication.data.Word
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
