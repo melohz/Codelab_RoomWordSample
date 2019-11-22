@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomwordsampleapplication.newword.NewWordActivity
 import com.example.roomwordsampleapplication.R
-import com.example.roomwordsampleapplication.WordListAdapter
 import com.example.roomwordsampleapplication.data.Word
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = WordListAdapter(this)
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+//        recyclerView.layoutManager = LinearLayoutManager(this)
 
         wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
 

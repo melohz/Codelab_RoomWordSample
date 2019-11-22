@@ -5,21 +5,20 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.roomwordsampleapplication.data.Word
+import com.example.roomwordsampleapplication.data.TrainingContents
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(Word::class), version = 2, exportSchema = false)
-abstract class WordRoomDatabase : RoomDatabase() {
+@Database(entities = arrayOf(TrainingContents::class), version = 2, exportSchema = false)
+abstract class TrainingRoomDatabase : RoomDatabase() {
 
-    abstract fun wordDao(): WordDao
+    abstract fun trainingDao(): TrainingDao
 
     companion object {
-        // Singleton prevents multiple instances of database opening at the same time.
         @Volatile
-        private var INSTANCE: WordRoomDatabase? = null
+        private var INSTANCE: TrainingRoomDatabase? = null
 
-        fun getDatabase(context: Context, scope: CoroutineScope): WordRoomDatabase {
+        fun getDatabase(context: Context, scope: CoroutineScope): TrainingRoomDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -27,9 +26,9 @@ abstract class WordRoomDatabase : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    WordRoomDatabase::class.java,
-                    "word_database"
-                ).addCallback(WordDatabaseCallback(scope))
+                    TrainingRoomDatabase::class.java,
+                    "training_database"
+                ).addCallback(TrainingDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
                 return instance
@@ -37,28 +36,21 @@ abstract class WordRoomDatabase : RoomDatabase() {
         }
     }
 
-    private class WordDatabaseCallback(
+    private class TrainingDatabaseCallback(
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
         override fun onOpen(db: SupportSQLiteDatabase) {
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    populateDatabase(database.wordDao())
+                    populateDatabase(database.trainingDao())
                 }
             }
         }
-
-        suspend fun populateDatabase(wordDao: WordDao) {
-            // Delete all content here.
-            wordDao.deleteAll()
-
-            // Add sample words.
-            var word = Word("Hello")
-            wordDao.insert(word)
-            word = Word("World!")
-            wordDao.insert(word)
+        suspend fun populateDatabase(trainingDao: TrainingDao) {
+            // Add sample
+            var training = TrainingContents("Push up", "10")
+            trainingDao.insert(training)
         }
     }
-
 }

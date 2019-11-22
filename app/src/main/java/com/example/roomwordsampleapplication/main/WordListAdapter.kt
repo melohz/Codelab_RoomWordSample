@@ -1,4 +1,4 @@
-package com.example.roomwordsampleapplication
+package com.example.roomwordsampleapplication.main
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.roomwordsampleapplication.R
 import com.example.roomwordsampleapplication.data.Word
 
 class WordListAdapter internal constructor(
